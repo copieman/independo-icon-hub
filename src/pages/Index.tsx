@@ -39,11 +39,14 @@ const Index = () => {
   // Function to handle downloading a single icon
   const handleDownload = (iconType: string) => {
     const { variant, format } = selections[iconType];
-    // In a real app, this would trigger an actual file download
+    
+    // Format the file name for download
     const fileName = `${iconType}_${variant.replace(/ /g, '_')}.${format}`;
     
-    // Get the appropriate URL
-    const fileUrl = getSvgUrl(iconType, variant);
+    // Get the appropriate URL based on format
+    const fileUrl = format === 'svg' 
+      ? getSvgUrl(iconType, variant)
+      : getPreviewImage(iconType);
     
     if (fileUrl) {
       // Create an anchor element and trigger download
@@ -70,19 +73,46 @@ const Index = () => {
 
   // Helper function to get the SVG URL based on iconType and variant
   const getSvgUrl = (iconType: string, variant: string): string => {
-    // Map variants to file names
-    const variantFormatted = variant.replace(/ /g, '_');
-    const fileName = `Independo Icons/${iconType} ${variant}.svg`;
+    // Format the variant for the filename (replace spaces with appropriate format)
+    // For example: "raw" stays "raw", "optically centered" becomes "optically aligned"
+    // "dark mode" becomes "darkmode", etc.
     
-    // Return the SVG URL
-    return fileName;
+    let formattedVariant = variant;
+    
+    // Special case mapping
+    if (variant === "raw") {
+      formattedVariant = "raw centered";
+    } else if (variant === "optically centered") {
+      formattedVariant = "optically aligned";
+    } else if (variant === "dark mode") {
+      formattedVariant = "darkmode optically aligned";
+    } else if (variant === "coloured") {
+      formattedVariant = "coloured optically aligned";
+    }
+    
+    // Return the SVG file path
+    return `Independo Icons/${iconType} ${formattedVariant}.svg`;
   };
 
   // Helper function to get the appropriate preview image based on selections
   const getPreviewImage = (iconType: string): string => {
     const { variant } = selections[iconType];
-    // For preview, we'll use the PNG versions
-    return `Independo Icons/${iconType} ${variant}.png`;
+    
+    // Use the same variant formatting logic as getSvgUrl
+    let formattedVariant = variant;
+    
+    if (variant === "raw") {
+      formattedVariant = "raw centered";
+    } else if (variant === "optically centered") {
+      formattedVariant = "optically aligned";
+    } else if (variant === "dark mode") {
+      formattedVariant = "darkmode optically aligned";
+    } else if (variant === "coloured") {
+      formattedVariant = "coloured optically aligned";
+    }
+    
+    // Return the PNG file path for preview
+    return `Independo Icons/${iconType} ${formattedVariant}.png`;
   };
 
   return (
