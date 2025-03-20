@@ -9,6 +9,9 @@ const iconTypes = ["Journal", "Todo", "Calendar"];
 const iconVariants = ["raw", "optically centered", "with guide", "coloured", "dark mode"];
 const fileFormats = ["png", "svg"];
 
+// Base URL for GitHub raw content
+const GITHUB_RAW_BASE_URL = "https://raw.githubusercontent.com/yourusername/yourrepository/main/Independo%20Icons/";
+
 // Types for our state management
 type IconSelection = {
   [key: string]: {
@@ -66,7 +69,7 @@ const Index = () => {
   // Function to handle downloading all icons
   const handleDownloadAll = () => {
     // Download the zip file directly
-    const zipFileUrl = 'Independo Icons/Independo Icons.zip';
+    const zipFileUrl = `${GITHUB_RAW_BASE_URL}Independo%20Icons.zip`;
     const link = document.createElement('a');
     link.href = zipFileUrl;
     link.download = 'Independo Icons.zip';
@@ -80,9 +83,6 @@ const Index = () => {
   // Helper function to get the SVG URL based on iconType and variant
   const getSvgUrl = (iconType: string, variant: string): string => {
     // Format the variant for the filename (replace spaces with appropriate format)
-    // For example: "raw" stays "raw", "optically centered" becomes "optically aligned"
-    // "dark mode" becomes "darkmode", etc.
-    
     let formattedVariant = variant;
     
     // Special case mapping
@@ -96,8 +96,11 @@ const Index = () => {
       formattedVariant = "coloured optically aligned";
     }
     
-    // Return the SVG file path
-    return `Independo Icons/${iconType} ${formattedVariant}.svg`;
+    // Create the path to the SVG file with URL encoding for spaces
+    const filename = `${iconType}%20${formattedVariant.replace(/ /g, '%20')}.svg`;
+    
+    // Return the GitHub raw URL
+    return `${GITHUB_RAW_BASE_URL}${filename}`;
   };
 
   // Helper function to get the appropriate preview image based on selections
@@ -117,8 +120,11 @@ const Index = () => {
       formattedVariant = "coloured optically aligned";
     }
     
-    // Return the PNG file path for preview
-    return `Independo Icons/${iconType} ${formattedVariant}.png`;
+    // Create the path to the PNG file with URL encoding for spaces
+    const filename = `${iconType}%20${formattedVariant.replace(/ /g, '%20')}.png`;
+    
+    // Return the GitHub raw URL
+    return `${GITHUB_RAW_BASE_URL}${filename}`;
   };
 
   return (
@@ -198,6 +204,16 @@ const Index = () => {
               <Download size={16} />
               <span>Download</span>
             </button>
+            
+            {/* GitHub Permalink */}
+            <a 
+              href={getSvgUrl(iconType).replace('raw.githubusercontent.com', 'github.com').replace('/main/', '/blob/main/')} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-xs text-blue-600 hover:underline"
+            >
+              View on GitHub
+            </a>
           </div>
         ))}
       </div>
