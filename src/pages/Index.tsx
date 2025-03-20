@@ -65,10 +65,16 @@ const Index = () => {
 
   // Function to handle downloading all icons
   const handleDownloadAll = () => {
-    Object.keys(selections).forEach(iconType => {
-      handleDownload(iconType);
-    });
-    toast.success("Downloading all selected icons");
+    // Download the zip file directly
+    const zipFileUrl = 'Independo Icons/Independo Icons.zip';
+    const link = document.createElement('a');
+    link.href = zipFileUrl;
+    link.download = 'Independo Icons.zip';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    toast.success("Downloading all icons as ZIP archive");
   };
 
   // Helper function to get the SVG URL based on iconType and variant
@@ -167,32 +173,31 @@ const Index = () => {
               </Select>
             </div>
             
-            {/* Format Toggle and Download Button */}
-            <div className="flex w-full gap-2">
-              <div className="flex border rounded-md overflow-hidden">
-                {fileFormats.map(format => (
-                  <button
-                    key={format}
-                    className={`px-3 py-1.5 text-sm format-toggle ${
-                      selections[iconType].format === format 
-                        ? 'bg-black text-white' 
-                        : 'bg-white text-black hover:bg-gray-100'
-                    }`}
-                    onClick={() => updateSelection(iconType, "format", format)}
-                  >
-                    {format.toUpperCase()}
-                  </button>
-                ))}
-              </div>
-              
-              <button 
-                onClick={() => handleDownload(iconType)} 
-                className="flex-1 bg-black text-white rounded-md flex items-center justify-center gap-1 download-btn"
-              >
-                <Download size={16} />
-                <span>Download</span>
-              </button>
+            {/* Format Toggle */}
+            <div className="flex w-full border rounded-md overflow-hidden">
+              {fileFormats.map(format => (
+                <button
+                  key={format}
+                  className={`flex-1 px-3 py-1.5 text-sm format-toggle ${
+                    selections[iconType].format === format 
+                      ? 'bg-black text-white' 
+                      : 'bg-white text-black hover:bg-gray-100'
+                  }`}
+                  onClick={() => updateSelection(iconType, "format", format)}
+                >
+                  {format.toUpperCase()}
+                </button>
+              ))}
             </div>
+            
+            {/* Download Button - Now below the format toggle */}
+            <button 
+              onClick={() => handleDownload(iconType)} 
+              className="w-full bg-black text-white rounded-md py-2 flex items-center justify-center gap-1 download-btn"
+            >
+              <Download size={16} />
+              <span>Download</span>
+            </button>
           </div>
         ))}
       </div>
