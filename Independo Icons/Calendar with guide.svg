@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Outer_Guide" data-name="Outer Guide" width="1024" height="1024" rx="228" fill="#fff"/>
+    </clipPath>
+    <clipPath id="clip-Calendar_with_guide">
+      <rect width="1024" height="1024"/>
+    </clipPath>
+  </defs>
+  <g id="Calendar_with_guide" data-name="Calendar with guide" clip-path="url(#clip-Calendar_with_guide)">
+    <rect width="1024" height="1024" fill="#fff"/>
+    <g id="Guides" opacity="0.5">
+      <g id="Guidelines" clip-path="url(#clip-path)">
+        <path id="Bottom_Horizontal" data-name="Bottom Horizontal" d="M0,703H1024" fill="none" stroke="#007aff" stroke-width="1"/>
+        <path id="Middle_Horizontal" data-name="Middle Horizontal" d="M0,512H1024" fill="none" stroke="#007aff" stroke-width="1"/>
+        <path id="Top_Horizontal" data-name="Top Horizontal" d="M0,321H1024" fill="none" stroke="#007aff" stroke-width="1"/>
+        <path id="Right_Vertical" data-name="Right Vertical" d="M703,1024V0" fill="none" stroke="#007aff" stroke-width="1"/>
+        <path id="Middle_Vertical" data-name="Middle Vertical" d="M512,1024V0" fill="none" stroke="#007aff" stroke-width="1"/>
+        <path id="Left_Vertical" data-name="Left Vertical" d="M321,1024V0" fill="none" stroke="#007aff" stroke-width="1"/>
+        <path id="Descending_Diagonal" data-name="Descending Diagonal" d="M1024,1024,0,0" fill="none" stroke="#007aff" stroke-width="1"/>
+        <path id="Ascending_Diagonal" data-name="Ascending Diagonal" d="M0,1024,1024,0" fill="none" stroke="#007aff" stroke-width="1"/>
+        <rect id="Inner_Guide" data-name="Inner Guide" width="890" height="890" transform="translate(67 67)" fill="none" stroke="#007aff" stroke-width="1"/>
+        <circle id="Inner_Circle" data-name="Inner Circle" cx="191" cy="191" r="191" transform="translate(321 321)" fill="none" stroke="#007aff" stroke-width="1"/>
+        <circle id="Middle_Circle" data-name="Middle Circle" cx="269" cy="269" r="269" transform="translate(243 243)" fill="none" stroke="#007aff" stroke-width="1"/>
+        <circle id="Outer_Circle" data-name="Outer Circle" cx="445" cy="445" r="445" transform="translate(67 67)" fill="none" stroke="#007aff" stroke-width="1"/>
+      </g>
+      <rect id="App_Border" data-name="App Border" width="1023" height="1023" rx="227.5" transform="translate(0.5 0.5)" fill="none" stroke="#ff3b30" stroke-width="1"/>
+    </g>
+    <path id="Border" d="M-3238-18454.5a87.5,87.5,0,0,1,87.5-87.5,87.5,87.5,0,0,1,78.1,48H-2844a140.722,140.722,0,0,0,28.213-2.85,139.369,139.369,0,0,0,26.28-8.154,139.944,139.944,0,0,0,23.781-12.906,141.393,141.393,0,0,0,20.721-17.1,140.869,140.869,0,0,0,17.095-20.717A140.036,140.036,0,0,0-2715-18579.5a139.563,139.563,0,0,0,8.159-26.279,141.187,141.187,0,0,0,2.844-28.213V-18894a141.216,141.216,0,0,0-2.844-28.213,139.563,139.563,0,0,0-8.159-26.279,140.036,140.036,0,0,0-12.907-23.781,140.8,140.8,0,0,0-17.095-20.721,141.005,141.005,0,0,0-20.721-17.094,140,140,0,0,0-23.781-12.908,138.98,138.98,0,0,0-26.28-8.154A140.79,140.79,0,0,0-2844-19034h-260a140.873,140.873,0,0,0-28.218,2.844,138.938,138.938,0,0,0-26.275,8.154,139.993,139.993,0,0,0-23.781,12.908,140.75,140.75,0,0,0-20.721,17.094,141.1,141.1,0,0,0-17.095,20.721,139.7,139.7,0,0,0-12.907,23.781,139.207,139.207,0,0,0-8.159,26.279A140.876,140.876,0,0,0-3244-18894v260.008a139.832,139.832,0,0,0,7.127,44.219,139.379,139.379,0,0,0,19.848,38.41,118.242,118.242,0,0,0-16.562,13.785,118.137,118.137,0,0,0-14.351,17.387,117.652,117.652,0,0,0-10.83,19.959,117.219,117.219,0,0,0-5.008,14.4,219.682,219.682,0,0,1-24.333-31.531,218.066,218.066,0,0,1-18.323-35.715,216.34,216.34,0,0,1-11.55-39.125,218.9,218.9,0,0,1-4.02-41.787V-18894c0-120.205,97.8-218,218-218h260c120.2,0,218,97.795,218,218v260.008c0,120.205-97.8,218-218,218h-227.9a87.512,87.512,0,0,1-78.6,49A87.5,87.5,0,0,1-3238-18454.5Z" transform="translate(3485.001 19276)"/>
+    <path id="Calendar" d="M-3091-18822a15,15,0,0,1-15-15v-156a15,15,0,0,1,15-15h48a15,15,0,0,1,15,15v156a15,15,0,0,1-15,15Zm-108,0a15,15,0,0,1-15-15v-156a15,15,0,0,1,15-15h48a15,15,0,0,1,15,15v156a15,15,0,0,1-15,15Zm-108,0a15,15,0,0,1-15-15v-156a15,15,0,0,1,15-15h48a15,15,0,0,1,15,15v156a15,15,0,0,1-15,15Zm0-216a15,15,0,0,1-15-15v-48a15,15,0,0,1,15-15h264a15,15,0,0,1,15,15v48a15,15,0,0,1-15,15Z" transform="translate(3687 19481)"/>
+  </g>
+</svg>
