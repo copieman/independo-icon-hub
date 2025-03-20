@@ -207,7 +207,7 @@ const Index = () => {
             
             {/* GitHub Permalink */}
             <a 
-              href={getSvgUrl(iconType).replace('raw.githubusercontent.com', 'github.com').replace('/main/', '/blob/main/')} 
+              href={getSvgUrl(iconType, variant)} 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-xs text-blue-600 hover:underline"
