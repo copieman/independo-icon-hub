@@ -207,7 +207,7 @@ const Index = () => {
             
             {/* GitHub Permalink */}
             <a 
-              href={getSvgUrl(iconType, variant)} 
+              href={getSvgUrl(iconType, selections[iconType].variant)} 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-xs text-blue-600 hover:underline"
