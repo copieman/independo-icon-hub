@@ -10,7 +10,7 @@ const iconVariants = ["raw", "optically centered", "with guide", "coloured", "da
 const fileFormats = ["png", "svg"];
 
 // Base URL for GitHub raw content
-const GITHUB_RAW_BASE_URL = "https://raw.githubusercontent.com/yourusername/yourrepository/main/Independo%20Icons/";
+const GITHUB_RAW_BASE_URL = "https://raw.githubusercontent.com/copieman/independo-icon-hub/84d2da99340a33a7fd3fc7fe4bda937035758012/Independo%20Icons/";
 
 // Types for our state management
 type IconSelection = {
