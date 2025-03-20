@@ -52,15 +52,30 @@ const Index = () => {
       : getPreviewImage(iconType);
     
     if (fileUrl) {
-      // Create an anchor element and trigger download
-      const link = document.createElement('a');
-      link.href = fileUrl;
-      link.download = fileName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      toast.success(`Downloading ${fileName}`);
+      // Fetch the file and trigger download
+      fetch(fileUrl)
+        .then(response => response.blob())
+        .then(blob => {
+          // Create a blob URL and use it for download
+          const blobUrl = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = blobUrl;
+          link.download = fileName;
+          document.body.appendChild(link);
+          link.click();
+          
+          // Clean up
+          setTimeout(() => {
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(blobUrl);
+          }, 100);
+          
+          toast.success(`Downloading ${fileName}`);
+        })
+        .catch(error => {
+          console.error("Download failed:", error);
+          toast.error(`Failed to download ${fileName}`);
+        });
     } else {
       toast.error(`File not found: ${fileName}`);
     }
@@ -68,16 +83,32 @@ const Index = () => {
 
   // Function to handle downloading all icons
   const handleDownloadAll = () => {
-    // Download the zip file directly
+    // Download the zip file using fetch and trigger download
     const zipFileUrl = `${GITHUB_RAW_BASE_URL}Independo%20Icons.zip`;
-    const link = document.createElement('a');
-    link.href = zipFileUrl;
-    link.download = 'Independo Icons.zip';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
     
-    toast.success("Downloading all icons as ZIP archive");
+    fetch(zipFileUrl)
+      .then(response => response.blob())
+      .then(blob => {
+        // Create a blob URL and use it for download
+        const blobUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = 'Independo Icons.zip';
+        document.body.appendChild(link);
+        link.click();
+        
+        // Clean up
+        setTimeout(() => {
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(blobUrl);
+        }, 100);
+        
+        toast.success("Downloading all icons as ZIP archive");
+      })
+      .catch(error => {
+        console.error("Download failed:", error);
+        toast.error("Failed to download ZIP archive");
+      });
   };
 
   // Helper function to get the SVG URL based on iconType and variant
@@ -196,7 +227,7 @@ const Index = () => {
               ))}
             </div>
             
-            {/* Download Button - Now below the format toggle */}
+            {/* Download Button - Below the format toggle */}
             <button 
               onClick={() => handleDownload(iconType)} 
               className="w-full bg-black text-white rounded-md py-2 flex items-center justify-center gap-1 download-btn"
@@ -204,16 +235,6 @@ const Index = () => {
               <Download size={16} />
               <span>Download</span>
             </button>
-            
-            {/* GitHub Permalink */}
-            <a 
-              href={getSvgUrl(iconType, selections[iconType].variant)} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-xs text-blue-600 hover:underline"
-            >
-              View on GitHub
-            </a>
           </div>
         ))}
       </div>
