@@ -39,13 +39,25 @@ const Index = () => {
   // Function to handle downloading a single icon
   const handleDownload = (iconType: string) => {
     const { variant, format } = selections[iconType];
-    // In a real app, this would use the actual file path
-    const fileName = `${iconType.toLowerCase()}_${variant.replace(/ /g, '_')}.${format}`;
-    toast.success(`Downloading ${fileName}`);
+    // In a real app, this would trigger an actual file download
+    const fileName = `${iconType}_${variant.replace(/ /g, '_')}.${format}`;
     
-    // Simulate download - in a real app, this would trigger an actual file download
-    // window.location.href = `/icons/${fileName}`;
-    console.log(`Downloading: ${fileName}`);
+    // Get the appropriate URL
+    const fileUrl = getSvgUrl(iconType, variant);
+    
+    if (fileUrl) {
+      // Create an anchor element and trigger download
+      const link = document.createElement('a');
+      link.href = fileUrl;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      toast.success(`Downloading ${fileName}`);
+    } else {
+      toast.error(`File not found: ${fileName}`);
+    }
   };
 
   // Function to handle downloading all icons
@@ -56,36 +68,21 @@ const Index = () => {
     toast.success("Downloading all selected icons");
   };
 
-  // Helper function to get the appropriate image path based on selections
-  const getImagePath = (iconType: string) => {
+  // Helper function to get the SVG URL based on iconType and variant
+  const getSvgUrl = (iconType: string, variant: string): string => {
+    // Map variants to file names
+    const variantFormatted = variant.replace(/ /g, '_');
+    const fileName = `Independo Icons/${iconType} ${variant}.svg`;
+    
+    // Return the SVG URL
+    return fileName;
+  };
+
+  // Helper function to get the appropriate preview image based on selections
+  const getPreviewImage = (iconType: string): string => {
     const { variant } = selections[iconType];
-    
-    // Map variant names to icon indices (these would normally map to actual files)
-    // For the demo, we're using the uploaded images in order
-    const variantIndex = iconVariants.indexOf(variant);
-    const typeIndex = iconTypes.indexOf(iconType);
-    
-    // Calculate index in the image set (3 variants per type, 3 types)
-    const imageIndex = typeIndex * 5 + variantIndex;
-    
-    // Return the appropriate uploaded image path
-    return `public/lovable-uploads/${[
-      '40904533-7fe3-4143-accc-f252ed5ebdb2.png',
-      '89bae6ea-075a-4420-80ec-8b2ffa9195eb.png',
-      '969acc64-a3bd-49d8-8e27-438f10aedd8d.png',
-      '7584dadc-d957-4972-8b9a-5047afde85d0.png',
-      '9a3ac4b0-0b1c-4147-a53e-8999ba1a6fc0.png',
-      '5633f748-3c25-43d6-b742-2d35644e44ce.png',
-      'b70503a9-2ebc-496d-93d9-1a662ddf81e2.png',
-      '4f45629d-c009-436f-bd2e-78d8d2c21690.png',
-      '0a017553-805d-44c0-aa80-08b9d36f1f75.png',
-      '269edc03-b99c-4992-a1ff-4a9e0a4f05c6.png',
-      '12fb2fe5-52a6-4c63-852f-3a5ab5591583.png',
-      'c1e9dacf-bdf5-40b8-9d38-16297fd1ad78.png',
-      'e55b73ab-f53d-42e8-84ec-38aa07dc7208.png',
-      '7a0206a6-bae5-4d3f-9047-7fc4e83bc8c2.png',
-      '8264219f-3a53-4c61-bcb1-7c7f1feacc6d.png'
-    ][imageIndex]}`;
+    // For preview, we'll use the PNG versions
+    return `Independo Icons/${iconType} ${variant}.png`;
   };
 
   return (
@@ -112,9 +109,9 @@ const Index = () => {
             {/* Icon Image */}
             <div className="app-icon w-40 h-40 md:w-48 md:h-48 flex items-center justify-center bg-white">
               <img 
-                src={getImagePath(iconType)} 
+                src={getPreviewImage(iconType)} 
                 alt={`${iconType} icon - ${selections[iconType].variant}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
             
